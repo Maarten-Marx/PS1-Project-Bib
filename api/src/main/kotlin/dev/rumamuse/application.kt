@@ -10,12 +10,12 @@ import io.ktor.server.plugins.cors.routing.*
 import org.jetbrains.exposed.sql.Database
 
 fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
-
     val dbUser = System.getenv("db-user")
     val dbPass = System.getenv("db-pass")
     Database.connect("jdbc:mysql://localhost:3306/library", user = dbUser, password = dbPass)
+
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
+        .start(wait = true)
 }
 
 fun Application.module() {

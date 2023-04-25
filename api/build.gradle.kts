@@ -38,6 +38,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     implementation(kotlin("stdlib-jdk8"))
+    implementation("mysql:mysql-connector-java:8.0.30")
 }
 kotlin {
     jvmToolchain(11)
