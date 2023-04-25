@@ -18,7 +18,7 @@ closing_time timestamp not null
 
 create table Schedule(
 schedule_id int auto_increment not null primary key,
-week_day varchar(10) not null,
+week_day_index int not null,
 opening_time timestamp not null,
 closing_time timestamp not null
 );
