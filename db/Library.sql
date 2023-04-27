@@ -12,13 +12,15 @@ number_of_seats int
 create table Schedule_Exception(
 schedule_exception_id int auto_increment not null primary key,
 date date not null,
-opening_time timestamp not null,
+number_of_seats int not null,
+opening_time timestamp not null,.
 closing_time timestamp not null
 );
 
 create table Schedule(
 schedule_id int auto_increment not null primary key,
 week_day_index int not null,
+number_of_seats int not null,
 opening_time timestamp not null,
 closing_time timestamp not null
 );
