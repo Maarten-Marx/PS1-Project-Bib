@@ -39,6 +39,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     implementation(kotlin("stdlib-jdk8"))
     implementation("mysql:mysql-connector-java:8.0.30")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 }
 kotlin {
     jvmToolchain(11)
