@@ -9,6 +9,7 @@ import org.jetbrains.exposed.sql.javatime.timestamp
 
 object ScheduleException : IntIdTable("schedule_exception") {
     val date = date("date")
+    val numberOfSeats = integer("number_of_seats")
     val openingTime = timestamp("opening_time")
     val closingTime = timestamp("closing_time")
 }
@@ -17,6 +18,7 @@ data class ScheduleExceptionEntry(val key: EntityID<Int>) : IntEntity(key) {
     companion object : IntEntityClass<ScheduleExceptionEntry>(ScheduleException)
 
     val date by ScheduleException.date
+    val numberOfSeats by ScheduleException.numberOfSeats
     val openingTime by ScheduleException.openingTime
     val closingTime by ScheduleException.closingTime
 }
