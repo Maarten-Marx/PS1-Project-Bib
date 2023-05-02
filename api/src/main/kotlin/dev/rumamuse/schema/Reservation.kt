@@ -14,7 +14,7 @@ object Reservation : IntIdTable("reservation", "reservation_id") {
     val cancelHash = char("cancel_hash", 64)
 }
 
-data class ReservationEntry(val key: EntityID<Int>): IntEntity(key) {
+data class ReservationEntry(val key: EntityID<Int>) : IntEntity(key) {
     companion object : IntEntityClass<ReservationEntry>(Reservation)
 
     val firstName by Reservation.firstName

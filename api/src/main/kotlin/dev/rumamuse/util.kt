@@ -3,6 +3,9 @@ package dev.rumamuse
 import io.ktor.http.*
 import kotlin.reflect.KProperty
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+
+val tz = TimeZone.of("Europe/Brussels")
 
 /**
  * For using delegation on parameters

@@ -1,17 +1,19 @@
 package dev.rumamuse.schema
 
+import dev.rumamuse.data.DayInfo
+import kotlinx.datetime.*
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.javatime.date
-import org.jetbrains.exposed.sql.javatime.timestamp
+import org.jetbrains.exposed.sql.javatime.time
 
-object ScheduleException : IntIdTable("schedule_exception") {
+object ScheduleException : IntIdTable("schedule_exception", "schedule_exception_id") {
     val date = date("date")
     val numberOfSeats = integer("number_of_seats")
-    val openingTime = timestamp("opening_time")
-    val closingTime = timestamp("closing_time")
+    val openingTime = time("opening_time").nullable()
+    val closingTime = time("closing_time").nullable()
 }
 
 data class ScheduleExceptionEntry(val key: EntityID<Int>) : IntEntity(key) {
