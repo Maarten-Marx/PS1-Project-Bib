@@ -23,4 +23,11 @@ data class ScheduleExceptionEntry(val key: EntityID<Int>) : IntEntity(key) {
     val numberOfSeats by ScheduleException.numberOfSeats
     val openingTime by ScheduleException.openingTime
     val closingTime by ScheduleException.closingTime
+
+    fun toDayInfo() = DayInfo(
+        date.toKotlinLocalDate(),
+        openingTime?.toKotlinLocalTime(),
+        closingTime?.toKotlinLocalTime(),
+        numberOfSeats
+    )
 }

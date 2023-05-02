@@ -22,4 +22,11 @@ data class ScheduleEntry(val key: EntityID<Int>) : IntEntity(key) {
     val numberOfSeats by Schedule.numberOfSeats
     val openingTime by Schedule.openingTime
     val closingTime by Schedule.closingTime
+
+    fun toDayInfo(day: LocalDate) = DayInfo(
+        day,
+        openingTime?.toKotlinLocalTime(),
+        closingTime?.toKotlinLocalTime(),
+        numberOfSeats
+    )
 }
