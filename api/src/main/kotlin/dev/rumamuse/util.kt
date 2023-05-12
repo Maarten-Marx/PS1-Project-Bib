@@ -6,7 +6,6 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import org.apache.commons.mail.DefaultAuthenticator
 import org.apache.commons.mail.HtmlEmail
-import org.apache.commons.mail.SimpleEmail
 import java.security.MessageDigest
 
 val tz = TimeZone.of("Europe/Brussels")
