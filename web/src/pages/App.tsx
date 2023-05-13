@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../logo.svg'
 import '../css/App.css'
 import TimeRangeSelector from '../components/TimeRangeSelector'
 import DaySelector from '../components/DaySelector'
