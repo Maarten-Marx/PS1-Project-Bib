@@ -1,9 +1,9 @@
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
-import TimeRangeSelector from './components/TimeRangeSelector'
-import DaySelector from './components/DaySelector'
-import { PrimaryHorizontalDivider, SecondaryHorizontalDivider } from './components/HorizontalDivider'
+import logo from '../logo.svg'
+import '../css/App.css'
+import TimeRangeSelector from '../components/TimeRangeSelector'
+import DaySelector from '../components/DaySelector'
+import { PrimaryHorizontalDivider, SecondaryHorizontalDivider } from '../components/HorizontalDivider'
 
 function App() {
     return (
