@@ -1,5 +1,6 @@
 package dev.rumamuse.endpoints
 
+import dev.rumamuse.cancelUrl
 import dev.rumamuse.getValue
 import dev.rumamuse.payload.ReservationData
 import dev.rumamuse.schema.Reservation
@@ -48,7 +49,7 @@ fun Routing.reservations() {
             "Your reservation has been made!",
             "Hello ${data.firstName}!\n" +
                     "We've successfully stored your reservation.\n" +
-                    "If you would like to cancel this reservation, click <a href=\"http://127.0.0.1/cancel/${hash}\">here</a>.",
+                    "If you would like to cancel this reservation, click <a href=\"${cancelUrl(hash)}\">here</a>.",
             emailAddr,
             data.email,
             emailPass
