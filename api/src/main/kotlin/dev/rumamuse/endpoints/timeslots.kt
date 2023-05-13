@@ -21,6 +21,10 @@ import kotlinx.datetime.toKotlinInstant
 fun Routing.timeslots() {
     val prefix = "/timeslots"
 
+    options("$prefix/{day}") {
+        call.respond(HttpStatusCode.OK)
+    }
+
     get("$prefix/{day}") {
         val day by call.parameters
 

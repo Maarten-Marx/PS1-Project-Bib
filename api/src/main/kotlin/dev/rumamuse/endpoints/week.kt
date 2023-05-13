@@ -31,6 +31,10 @@ internal val latestTimeslot = Max(Timeslot.endTime, Timeslot.endTime.columnType)
 fun Routing.week() {
     val prefix = "/week"
 
+    options("$prefix/{day}") {
+        call.respond(HttpStatusCode.OK)
+    }
+
     get("$prefix/{day}") {
         val day by call.parameters
 

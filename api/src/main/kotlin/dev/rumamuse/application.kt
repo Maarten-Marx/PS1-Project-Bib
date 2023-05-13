@@ -20,10 +20,14 @@ fun main() {
 
 fun Application.module() {
     install(CORS) {
+        allowHost("127.0.0.1:3000")
+        allowHost("localhost:3000")
+
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Put)
         allowMethod(HttpMethod.Delete)
         allowMethod(HttpMethod.Patch)
+
         allowHeader(HttpHeaders.Authorization)
     }
 

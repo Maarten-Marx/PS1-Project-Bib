@@ -26,6 +26,10 @@ fun Routing.reservations() {
     val emailAddr = System.getenv("email-addr")
     val emailPass = System.getenv("email-pass")
 
+    options("$prefix/new") {
+        call.respond(HttpStatusCode.OK)
+    }
+
     post("$prefix/new") {
         val data = call.receive<ReservationData>()
         val hash = sha256(data)
@@ -56,6 +60,10 @@ fun Routing.reservations() {
         )
 
         call.respond(if (success) HttpStatusCode.OK else HttpStatusCode.NotModified)
+    }
+
+    options("$prefix/{hash}") {
+        call.respond(HttpStatusCode.OK)
     }
 
     delete("$prefix/{hash}") {
