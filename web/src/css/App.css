@@ -102,16 +102,17 @@ h2 {
     padding: 10px;
 
     background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
 
     border: 1px solid var(--primary-border-color);
     border-radius: var(--border-radius);
 }
 
-.day div:first-of-type p {
+.day:not(.selected, .disabled) div:first-of-type p {
     color: var(--tertiary-text-color);
 }
 
-.day div:last-of-type p {
+.day.day:not(.selected, .disabled) div:last-of-type p {
     color: var(--secondary-text-color);
 }
 
@@ -160,5 +161,16 @@ h2 {
     padding: 17px;
 
     border-radius: var(--border-radius);
+}
+
+.selected {
+    background-color: var(--selected-background-color);
+    color: var(--selected-text-color);
+    border-color: var(--selected-border-color);
+}
+
+.disabled {
+    background-color: var(--disabled-background-color);
+    color: var(--disabled-text-color);
 }
 
