@@ -34,6 +34,8 @@ fun Routing.reservations() {
         val data = call.receive<ReservationData>()
         val hash = sha256(data)
 
+        if (data.timeslotIDs.isEmpty()) return@post call.respond(HttpStatusCode.BadRequest)
+
         val success = transaction {
             val reservationId = Reservation.insertAndGetId {
                 it[firstName] = data.firstName
