@@ -27,6 +27,8 @@ fun Application.module() {
         allowMethod(HttpMethod.Delete)
 
         allowHeader(HttpHeaders.Authorization)
+        allowNonSimpleContentTypes = true
+        allowSameOrigin = true
     }
 
     install(ContentNegotiation) {
