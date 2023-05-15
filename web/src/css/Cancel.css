@@ -9,6 +9,7 @@ main.cancel {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 main.cancel .fa-spinner {
@@ -27,6 +28,7 @@ code {
 }
 
 main.cancel h1 {
+    text-align: center;
     margin-block-end: 1.5rem;
 }
 

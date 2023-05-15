@@ -1,0 +1,31 @@
+main.confirm {
+    height: 100%;
+    width: 100%;
+
+    margin: 2rem 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main.confirm h1 {
+    text-align: center;
+    margin-block-end: 1.5rem;
+}
+
+main.confirm p {
+    text-align: center;
+    line-height: 1.5em;
+
+    margin-block-end: 2rem;
+}
+
+main.confirm a {
+    color: var(--secondary-text-color);
+}
+
+main.confirm a:hover {
+    filter: brightness(70%);
+}

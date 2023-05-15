@@ -15,20 +15,25 @@ function Cancel() {
         </main>
     } else {
         return <main className='cancel'>
-            {
-                succeeded ? <>
-                    <h1>Afspraak geannuleerd!</h1>
-                    <p>Uw afspraak is bij deze geannuleerd.
-                        Als u een andere afspraak wenst te maken, klik dan op de link hieronder.</p>
-                </> : <>
-                    <h1>De afspraak kon niet geannuleerd worden.</h1>
-                    <p>
-                        De code <code>{hash}</code> is niet gelinkt aan een geldige afspraak.<br />
-                        Als u een nieuwe afspraak wenst te maken, klik dan op de link hieronder.
-                    </p>
-                </>
-            }
-            <a href='/'>Terug naar reservatiepagina</a>
+            <div>
+                {
+                    succeeded ? <>
+                        <h1>Afspraak geannuleerd!</h1>
+                        <p>Uw afspraak is bij deze geannuleerd.
+                            Als u een andere afspraak wenst te maken, klik dan op de link hieronder.</p>
+                    </> : <>
+                        <h1>De afspraak kon niet geannuleerd worden.</h1>
+                        <p>
+                            De code <code>{hash}</code> is niet gelinkt aan een geldige afspraak.<br />
+                            Als u een nieuwe afspraak wenst te maken, klik dan op de link hieronder.
+                        </p>
+                    </>
+                }
+                <p>
+                    <a href='/'>Terug naar reservatiepagina</a>
+                </p>
+            </div>
+            <p id="copy">RUMAMUSE &copy; 2023</p>
         </main>
     }
 }
