@@ -50,10 +50,10 @@ fun Routing.reservations() {
         }
 
         if (success) sendMail(
-            "Your reservation has been made!",
-            "Hello ${data.firstName}!\n" +
-                    "We've successfully stored your reservation.\n" +
-                    "If you would like to cancel this reservation, click <a href=\"${cancelUrl(hash)}\">here</a>.",
+            "Uw reservatie is geplaatst!",
+            "Dag ${data.firstName}!\n" +
+                    "We hebben uw reservatie goed ontvangen.\n" +
+                    "Als u wenst deze reservatie te annuleren, klik dan <a href=\"${cancelUrl(hash)}\">hier</a>.",
             emailAddr,
             data.email,
             emailPass
