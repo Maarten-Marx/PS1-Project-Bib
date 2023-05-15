@@ -13,6 +13,7 @@
     --primary-text-color: #000000;
     --secondary-text-color: #D2052F;
     --tertiary-text-color: #8E8E8E;
+    --quaternary-text-color: #2F4858;
     --disabled-text-color: #8E8E8E;
     --selected-text-color: #FFFFFF;
     --primary-border-color: #2F4858;
@@ -46,6 +47,13 @@ main {
 
 #rightPanel {
     width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#leftPanel, #rightPanel {
+    padding-inline: 30px;
 }
 
 h1 {
@@ -70,6 +78,13 @@ h2 {
 .secondaryHorizontalDivider {
     width: 25%;
     margin: 3px 0 15px 0;
+
+    border: 1px solid var(--quaternary-border-color);
+    border-radius: 2px;
+}
+
+.primaryVerticalDivider {
+    margin: 0 15px;
 
     border: 1px solid var(--quaternary-border-color);
     border-radius: 2px;
@@ -172,5 +187,77 @@ h2 {
 .disabled {
     background-color: var(--disabled-background-color);
     color: var(--disabled-text-color);
+}
+
+#formHeader {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#formHeader img {
+    height: 100px;
+    aspect-ratio: 1;
+}
+
+#formHeader .title {
+    font-size: 35px;
+    color: var(--tertiary-text-color);
+}
+
+#formHeader .subtitle {
+    font-size: 35px;
+    color: var(--primary-text-color);
+    font-weight: bolder;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+}
+
+#form h1 {
+    margin-block-end: 5px;
+}
+
+#form p {
+    color: var(--tertiary-text-color);
+    margin-block-end: 15px;
+    text-align: justify;
+}
+
+.formInput {
+    margin-block: 10px;
+}
+
+.formInput label {
+    color: var(--quaternary-text-color);
+    display: block;
+    margin-block-end: 5px;
+}
+
+.formInput input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--primary-border-color);
+    border-radius: var(--border-radius);
+}
+
+#form button {
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    background-color: var(--selected-background-color);
+    color: var(--selected-text-color);
+    padding: 10px 30px;
+    border: none;
+    border-radius: var(--border-radius);
+    align-self: flex-end;
+    margin-block-start: 20px;
+}
+
+#copy {
+    color: var(--tertiary-text-color);
+    text-align: center;
 }
 

@@ -7,3 +7,7 @@ export function PrimaryHorizontalDivider() {
 export function SecondaryHorizontalDivider() {
     return <div className='secondaryHorizontalDivider'></div>
 }
+
+export function PrimaryVerticalDivider() {
+    return <div className='primaryVerticalDivider'></div>
+}

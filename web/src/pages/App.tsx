@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/App.css'
 import TimeRangeSelector from '../components/TimeRangeSelector'
 import DaySelector from '../components/DaySelector'
-import { PrimaryHorizontalDivider, SecondaryHorizontalDivider } from '../components/HorizontalDivider'
+import { PrimaryHorizontalDivider, PrimaryVerticalDivider, SecondaryHorizontalDivider } from '../components/Divider'
 
 function App() {
     return (
@@ -26,28 +26,37 @@ function App() {
                     </div>
                 </div>
             </div>
+            <PrimaryVerticalDivider />
             <div id='rightPanel'>
-                <div className='form'>
+                <div id='formHeader'>
                     <div>
-                        <p>Bibliotheek</p>
-                        <p>Geel</p>
+                        <img src='/bib_logo.svg' alt='Bib logo' />
                     </div>
                     <div>
-                        <h2>Een plaats reserveren</h2>
-                        <SecondaryHorizontalDivider />
-                        <p>Vul uw gegevens in om plaatsen te reserveren. U ontvangt een bevestiging per e-mail.</p>
-
-                        <label htmlFor='firstName'>Voornaam</label>
-                        <input type='text' name='firstName' id='firstName' />
-                        <label htmlFor='surName'>Achternaam</label>
-                        <input type='text' name='surName' id='surName' />
-                        <label htmlFor='emailAddress'>E-mailadres</label>
-                        <input type='email' name='emailAddress' id='emailAddress' />
-                        <input type='submit' value='Bevestigen' />
-
+                        <p className='title'>Bibliotheek</p>
+                        <p className='subtitle'>Geel</p>
                     </div>
                 </div>
-                <p>RUMAMUSE &copy; 2023</p>
+                <div id='form'>
+                    <h1>Een plaats reserveren</h1>
+                    <SecondaryHorizontalDivider />
+                    <p>Vul uw gegevens in om plaatsen te reserveren. U ontvangt een bevestiging per e-mail.</p>
+
+                    <div className='formInput'>
+                        <label htmlFor='firstName'>Voornaam</label>
+                        <input type='text' name='firstName' id='firstName' />
+                    </div>
+                    <div className='formInput'>
+                        <label htmlFor='surName'>Achternaam</label>
+                        <input type='text' name='surName' id='surName' />
+                    </div>
+                    <div className='formInput'>
+                        <label htmlFor='emailAddress'>E-mailadres</label>
+                        <input type='email' name='emailAddress' id='emailAddress' />
+                    </div>
+                    <button>Bevestigen</button>
+                </div>
+                <p id="copy">RUMAMUSE &copy; 2023</p>
             </div>
         </main>
     )
