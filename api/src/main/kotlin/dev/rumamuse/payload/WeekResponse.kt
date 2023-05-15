@@ -8,4 +8,4 @@ import kotlinx.serialization.Serializable
 data class WeekResponse(val days: List<DayData>)
 
 @Serializable
-data class DayData(val day: LocalDate, val weekDayIndex: Int, val openingTime: LocalTime?, val closingTime: LocalTime?)
+data class DayData(val date: LocalDate, val weekDayIndex: Int, val openingTime: LocalTime?, val closingTime: LocalTime?)

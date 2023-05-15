@@ -41,7 +41,7 @@ Gets basic info about each day of the week that `day` is a part of.
 {
   days: [
     {
-      day: string,
+      date: string,
       weekdayIndex: int,
       openingTime: string?,
       closingTime: string?
