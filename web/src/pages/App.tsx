@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { FormEvent, useState } from 'react'
 import '../css/App.css'
 import TimeRangeSelector from '../components/TimeRangeSelector'
 import DaySelector from '../components/DaySelector'
 import { PrimaryHorizontalDivider, PrimaryVerticalDivider, SecondaryHorizontalDivider } from '../components/Divider'
+import Axios from 'axios'
+
+type AppState = {
+    timeslotIDs: number[]
+    firstName: string
+    lastName: string
+    email: string
+}
+
+type ReservationPayload = {
+    timeslotIDs: number[]
+    firstName: string
+    lastName: string
+    email: string
+}
 
 function App() {
+    const [state, setState] = useState<AppState>()
+
+    function handleInputChange(event: FormEvent<HTMLInputElement>) {
+        const name = event.currentTarget.name
+        const value = event.currentTarget.value
+        const prevState = state || { timeslotIDs: [], firstName: '', lastName: '', email: '' }
+        setState({ ...prevState, [name]: value })
+    }
+
+    function placeReservation() {
+        // TODO: Disable the submit button as long as required information is missing.
+        if (!state) return
+
+        Axios.post<any, any, ReservationPayload>('http://127.0.0.1:8080/reservations/new', { ...state })
+            .then(res => {
+                if (res.status == 200) location.href = '/confirm'
+            })
+            .catch(() => {})
+    }
+
     return (
         <main>
             <div id='leftPanel'>
@@ -44,19 +79,19 @@ function App() {
 
                     <div className='formInput'>
                         <label htmlFor='firstName'>Voornaam</label>
-                        <input type='text' name='firstName' id='firstName' />
+                        <input type='text' name='firstName' id='firstName' onChange={handleInputChange} />
                     </div>
                     <div className='formInput'>
-                        <label htmlFor='surName'>Achternaam</label>
-                        <input type='text' name='surName' id='surName' />
+                        <label htmlFor='lastName'>Achternaam</label>
+                        <input type='text' name='lastName' id='lastName' onChange={handleInputChange} />
                     </div>
                     <div className='formInput'>
-                        <label htmlFor='emailAddress'>E-mailadres</label>
-                        <input type='email' name='emailAddress' id='emailAddress' />
+                        <label htmlFor='email'>E-mailadres</label>
+                        <input type='email' name='email' id='email' onChange={handleInputChange} />
                     </div>
-                    <button>Bevestigen</button>
+                    <button onClick={placeReservation}>Bevestigen</button>
                 </div>
-                <p id="copy">RUMAMUSE &copy; 2023</p>
+                <p id='copy'>RUMAMUSE &copy; 2023</p>
             </div>
         </main>
     )
