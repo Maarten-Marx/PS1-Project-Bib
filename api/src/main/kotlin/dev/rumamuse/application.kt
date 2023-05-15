@@ -1,10 +1,10 @@
 package dev.rumamuse
 
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import org.jetbrains.exposed.sql.Database
@@ -24,9 +24,7 @@ fun Application.module() {
         allowHost("localhost:3000")
 
         allowMethod(HttpMethod.Options)
-        allowMethod(HttpMethod.Put)
         allowMethod(HttpMethod.Delete)
-        allowMethod(HttpMethod.Patch)
 
         allowHeader(HttpHeaders.Authorization)
     }
