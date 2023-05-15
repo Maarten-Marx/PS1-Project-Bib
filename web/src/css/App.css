@@ -25,16 +25,13 @@
 }
 
 #root {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
     width: 100vw;
     height: 100vh;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
 main {
+    height: 100%;
     display: flex;
 
     font-family: 'Lexend', sans-serif;
