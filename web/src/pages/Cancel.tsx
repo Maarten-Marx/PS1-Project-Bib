@@ -28,7 +28,9 @@ function Cancel() {
                     </p>
                 </>
             }
-            <a href='/'>Terug naar reservatiepagina</a>
+            <p>
+                <a href='/'>Terug naar reservatiepagina</a>
+            </p>
         </main>
     }
 }

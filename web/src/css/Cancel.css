@@ -27,6 +27,7 @@ code {
 }
 
 main.cancel h1 {
+    text-align: center;
     margin-block-end: 1.5rem;
 }
 
