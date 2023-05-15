@@ -24,13 +24,17 @@ function Day(props: DayProps) {
     // moment.locale('nl-be')
 
     return (
-        <div className={`day${props.day.openingTime ? ' disabled': ''}`}>
+        <div className={`day${!props.day.openingTime ? ' disabled' : ''}`}>
             <div>
                 <h2 className='dayName'>{moment(props.day.date, 'YYYY-MM-DD').format('dddd')}</h2>
                 <p className='date'>{moment(props.day.date, 'YYYY-MM-DD').format('D MMMM')}</p>
             </div>
             <div>
-                <p className='dayTimeRange'>xx:xx - xx:xx</p>
+                <p className='dayTimeRange'>{
+                    props.day.closingTime ?
+                        `${props.day.openingTime} - ${props.day.closingTime}` :
+                        'Gesloten'
+                }</p>
             </div>
         </div>
     )
@@ -56,9 +60,9 @@ export default function DaySelector() {
             <Loading />
         </main>
     } else {
-        const dayElements = [];
+        const dayElements = []
         for (const day of daysOfWeek) {
-            dayElements.push(<Day day={day} />);
+            dayElements.push(<Day day={day} />)
         }
 
         return (
@@ -68,7 +72,8 @@ export default function DaySelector() {
                     {dayElements}
                 </div>
             </div>
-        )}
+        )
+    }
 }
 
 async function getDaysInWeek(day: string): Promise<Day[]> {
