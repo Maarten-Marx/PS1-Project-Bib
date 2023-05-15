@@ -36,15 +36,15 @@ function App() {
                         <h2>Een plaats reserveren</h2>
                         <SecondaryHorizontalDivider />
                         <p>Vul uw gegevens in om plaatsen te reserveren. U ontvangt een bevestiging per e-mail.</p>
-                        <form action=''>
-                            <label htmlFor='firstName'>Voornaam</label>
-                            <input type='text' name='firstName' id='firstName' />
-                            <label htmlFor='surName'>Achternaam</label>
-                            <input type='text' name='surName' id='surName' />
-                            <label htmlFor='emailAddress'>E-mailadres</label>
-                            <input type='email' name='emailAddress' id='emailAddress' />
-                            <input type='submit' value='Bevestigen' />
-                        </form>
+
+                        <label htmlFor='firstName'>Voornaam</label>
+                        <input type='text' name='firstName' id='firstName' />
+                        <label htmlFor='surName'>Achternaam</label>
+                        <input type='text' name='surName' id='surName' />
+                        <label htmlFor='emailAddress'>E-mailadres</label>
+                        <input type='email' name='emailAddress' id='emailAddress' />
+                        <input type='submit' value='Bevestigen' />
+
                     </div>
                 </div>
                 <p>RUMAMUSE © 2023</p>
