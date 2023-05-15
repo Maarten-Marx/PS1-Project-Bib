@@ -12,7 +12,7 @@ Adds a new reservation.
 
 ```
 {
-  reservationIDs: [int],
+  timeslotIDs: [int],
   firstName: string,
   lastName: string,
   email: string
