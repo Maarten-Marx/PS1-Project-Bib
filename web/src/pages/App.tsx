@@ -47,7 +47,7 @@ function App() {
 
                     </div>
                 </div>
-                <p>RUMAMUSE © 2023</p>
+                <p>RUMAMUSE &copy; 2023</p>
             </div>
         </main>
     )
