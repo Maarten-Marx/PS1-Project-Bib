@@ -96,6 +96,18 @@ h2 {
     margin-bottom: 15px;
 }
 
+#dayRange button {
+    padding: 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    background-color: #0000;
+}
+
+#dayRange button:active {
+    background-color: var(--disabled-background-color);
+}
+
 #daySelectorDays {
     display: flex;
     justify-content: space-between;

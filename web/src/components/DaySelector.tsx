@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 import 'moment/locale/nl-be'
 import Axios from 'axios'
 import Loading from './Loading'
@@ -43,34 +43,62 @@ function Day(props: DayProps) {
     )
 }
 
-function DayRangePicker() {
+type DayRangePickerProps = {
+    days: Day[]
+    setDate: (offset: number) => void
+}
+
+function DayRangePicker(props: DayRangePickerProps) {
+    moment.locale('nl-be')
+    const first = moment(props.days[0].date)
+    const last = moment(props.days.reverse()[0].date)
+
     return (
         <div id='dayRange'>
-            <p><FontAwesomeIcon className='icon' icon={solid('angle-left')} /></p>
-            <p>x xxxxxxxx - x xxxxxxxx</p>
-            <p><FontAwesomeIcon className='icon' icon={solid('angle-right')} /></p>
+            <button onClick={() => props.setDate(-1)}>
+                <FontAwesomeIcon className='icon' icon={solid('angle-left')} />
+            </button>
+            <p>{first.format('D MMMM')} - {last.format('D MMMM')}</p>
+            <button onClick={() => props.setDate(1)}>
+                <FontAwesomeIcon className='icon' icon={solid('angle-right')} />
+            </button>
         </div>
     )
 }
 
+type DaySelectorState = {
+    daysOfWeek: Day[]
+    currentDate: Moment
+    selectedIndex: number | null
+}
+
 export default function DaySelector() {
-    const [daysOfWeek, setDaysOfWeek] = useState<Day[]>()
+    const [state, setState] = useState<DaySelectorState>()
 
+    function setDate(offset: number) {
+        const date = (state !== undefined && state.currentDate !== undefined) ? state.currentDate : moment()
+        date.add(offset, 'weeks')
+        getDaysInWeek(date).then((res) => setState({
+            daysOfWeek: res,
+            currentDate: date,
+            selectedIndex: null
+        }))
+    }
 
-    if (daysOfWeek === undefined) {
-        getDaysInWeek(moment().format('YYYY-MM-DD')).then(setDaysOfWeek)
+    if (state === undefined || state.daysOfWeek === undefined) {
+        setDate(0)
         return <main className='cancel'>
             <Loading />
         </main>
     } else {
         const dayElements = []
-        for (const day of daysOfWeek) {
+        for (const day of state.daysOfWeek) {
             dayElements.push(<Day day={day} />)
         }
 
         return (
             <div id='daySelector'>
-                <DayRangePicker />
+                <DayRangePicker days={state.daysOfWeek} setDate={setDate} />
                 <div id='daySelectorDays'>
                     {dayElements}
                 </div>
@@ -79,8 +107,8 @@ export default function DaySelector() {
     }
 }
 
-async function getDaysInWeek(day: string): Promise<Day[]> {
-    return await Axios.get<WeekResponse>(`http://127.0.0.1:8080/week/${day}`)
+async function getDaysInWeek(day: Moment): Promise<Day[]> {
+    return await Axios.get<WeekResponse>(`http://127.0.0.1:8080/week/${day.format('YYYY-MM-DD')}`)
         .then(response => {
             const daysOfWeek: Day[] = []
             for (const dayOfWeek of response.data.days) {
