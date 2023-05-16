@@ -12,13 +12,15 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.datetime.Clock
-import kotlinx.datetime.toJavaInstant
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.batchInsert
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.transactions.transaction
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.datetime.Clock
+import kotlinx.datetime.toJavaInstant
 
 fun Routing.reservations() {
     val prefix = "/reservations"
@@ -51,17 +53,21 @@ fun Routing.reservations() {
             }.isNotEmpty()
         }
 
-        if (success) sendMail(
-            "Uw reservatie is geplaatst!",
-            "Dag ${data.firstName}!\n" +
-                    "We hebben uw reservatie goed ontvangen.\n" +
-                    "Als u wenst deze reservatie te annuleren, klik dan <a href=\"${cancelUrl(hash)}\">hier</a>.",
-            emailAddr,
-            data.email,
-            emailPass
-        )
+        runBlocking {
+            if (success) launch {
+                sendMail(
+                    "Uw reservatie is geplaatst!",
+                    "Dag ${data.firstName}!\n" +
+                            "We hebben uw reservatie goed ontvangen.\n" +
+                            "Als u wenst deze reservatie te annuleren, klik dan <a href=\"${cancelUrl(hash)}\">hier</a>.",
+                    emailAddr,
+                    data.email,
+                    emailPass
+                )
+            }
 
-        call.respond(if (success) HttpStatusCode.OK else HttpStatusCode.NotModified)
+            call.respond(if (success) HttpStatusCode.OK else HttpStatusCode.NotModified)
+        }
     }
 
     options("$prefix/{hash}") {
