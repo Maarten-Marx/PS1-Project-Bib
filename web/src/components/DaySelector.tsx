@@ -91,16 +91,11 @@ export default function DaySelector() {
             <Loading />
         </main>
     } else {
-        const dayElements = []
-        for (const day of state.daysOfWeek) {
-            dayElements.push(<Day day={day} />)
-        }
-
         return (
             <div id='daySelector'>
                 <DayRangePicker days={state.daysOfWeek} setDate={setDate} />
                 <div id='daySelectorDays'>
-                    {dayElements}
+                    {state.daysOfWeek.map((day, i) => <Day day={day} key={i}/>)}
                 </div>
             </div>
         )
