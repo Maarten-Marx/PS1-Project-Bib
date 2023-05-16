@@ -26,8 +26,10 @@ function Day(props: DayProps) {
     const date = moment(props.day.date, 'YYYY-MM-DD')
     date.locale('nl-be')
 
+    const disabled = props.day.openingTime == null || moment(props.day.date).date() < moment().date()
+
     return (
-        <div className={`day${!props.day.openingTime ? ' disabled' : ''}`}>
+        <div className={`day${disabled? ' disabled' : ''}`}>
             <div>
                 <h2 className='dayName'>{capitalize(date.format('dddd'))}</h2>
                 <p className='date'>{date.format('D MMMM')}</p>
