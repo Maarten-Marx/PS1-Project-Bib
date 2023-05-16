@@ -24,7 +24,7 @@ type DayProps = {
 
 function Day(props: DayProps) {
     const date = moment(props.day.date, 'YYYY-MM-DD')
-    date.locale("nl-be")
+    date.locale('nl-be')
 
     return (
         <div className={`day${!props.day.openingTime ? ' disabled' : ''}`}>
