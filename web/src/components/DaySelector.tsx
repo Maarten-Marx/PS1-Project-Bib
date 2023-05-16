@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import moment from 'moment'
+import 'moment/locale/nl-be'
 import Axios from 'axios'
 import Loading from './Loading'
+import { capitalize } from '../util'
 
 type Day = {
     date: string,
@@ -21,13 +23,14 @@ type DayProps = {
 }
 
 function Day(props: DayProps) {
-    // moment.locale('nl-be')
+    const date = moment(props.day.date, 'YYYY-MM-DD')
+    date.locale("nl-be")
 
     return (
         <div className={`day${!props.day.openingTime ? ' disabled' : ''}`}>
             <div>
-                <h2 className='dayName'>{moment(props.day.date, 'YYYY-MM-DD').format('dddd')}</h2>
-                <p className='date'>{moment(props.day.date, 'YYYY-MM-DD').format('D MMMM')}</p>
+                <h2 className='dayName'>{capitalize(date.format('dddd'))}</h2>
+                <p className='date'>{date.format('D MMMM')}</p>
             </div>
             <div>
                 <p className='dayTimeRange'>{
