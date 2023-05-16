@@ -10,6 +10,7 @@
     --primary-background-color: #F5F5F5;
     --disabled-background-color: #D9D9D9;
     --selected-background-color: #D2052F;
+    --hover-background-color: #BC042A;
     --pressed-background-color: #A60324;
     --primary-text-color: #000000;
     --secondary-text-color: #D2052F;
@@ -102,6 +103,10 @@ h2 {
     border-radius: var(--border-radius);
     cursor: pointer;
     background-color: #0000;
+}
+
+#dayRange button:hover {
+    background-color: var(--primary-background-color);
 }
 
 #dayRange button:active {
@@ -265,6 +270,10 @@ h2 {
     align-self: flex-end;
     margin-block-start: 20px;
     cursor: pointer;
+}
+
+#form button:hover {
+    background-color: var(--hover-background-color);
 }
 
 #form button:active {
