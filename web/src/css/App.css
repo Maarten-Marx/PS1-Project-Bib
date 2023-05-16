@@ -195,8 +195,8 @@ h2 {
 }
 
 .disabled {
-    background-color: var(--disabled-background-color);
-    color: var(--disabled-text-color);
+    background-color: var(--disabled-background-color) !important;
+    color: var(--disabled-text-color) !important;
 }
 
 #formHeader {

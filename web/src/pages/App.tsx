@@ -21,6 +21,12 @@ type ReservationPayload = {
 
 function App() {
     const [state, setState] = useState<AppState>()
+    const formDisabled = !state
+        || !state.timeslotIDs
+        || state.timeslotIDs.length === 0
+        || !state.firstName
+        || !state.lastName
+        || !state.email
 
     function handleInputChange(event: FormEvent<HTMLInputElement>) {
         const name = event.currentTarget.name
@@ -30,7 +36,6 @@ function App() {
     }
 
     function placeReservation() {
-        // TODO: Disable the submit button as long as required information is missing.
         if (!state) return
 
         Axios.post<any, any, ReservationPayload>('http://127.0.0.1:8080/reservations/new', { ...state })
@@ -89,7 +94,11 @@ function App() {
                         <label htmlFor='email'>E-mailadres</label>
                         <input type='email' name='email' id='email' onChange={handleInputChange} />
                     </div>
-                    <button onClick={placeReservation}>Bevestigen</button>
+                    <button disabled={formDisabled}
+                            className={formDisabled ? 'disabled' : ''}
+                            onClick={placeReservation}>
+                        Bevestigen
+                    </button>
                 </div>
                 <p id='copy'>RUMAMUSE &copy; 2023</p>
             </div>
