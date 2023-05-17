@@ -1,49 +1,47 @@
-create schema library;
-use library;
+DROP SCHEMA IF EXISTS library;
+CREATE SCHEMA library;
+USE library;
 
-create table Timeslot
-(
-    timeslot_id int auto_increment not null primary key,
-    start_time timestamp not null,
-    end_time timestamp not null,
-    date date not null,
-    number_of_seats int not null
+CREATE TABLE Timeslot (
+    timeslot_id INT AUTO_INCREMENT PRIMARY KEY,
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP NOT NULL,
+    date DATE NOT NULL,
+    number_of_seats INT NOT NULL
 );
 
-create table Schedule_Exception
-(
-    schedule_exception_id int auto_increment not null primary key,
-    date date not null,
-    number_of_seats int not null,
-    opening_time time,
-    closing_time time
+CREATE TABLE Schedule_Exception (
+    schedule_exception_id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE NOT NULL,
+    number_of_seats INT NOT NULL,
+    opening_time TIME,
+    closing_time TIME
 );
 
-create table Schedule
-(
-    schedule_id int auto_increment not null primary key,
-    week_day_index int not null,
-    number_of_seats int not null,
-    opening_time time,
-    closing_time time
+CREATE TABLE Schedule (
+    schedule_id INT AUTO_INCREMENT PRIMARY KEY,
+    week_day_index INT NOT NULL,
+    number_of_seats INT NOT NULL,
+    opening_time TIME,
+    closing_time TIME
 );
 
-create table Reservation
+CREATE TABLE Reservation
 (
-    reservation_id int auto_increment not null primary key,
-    name varchar(20) not null,
-    first_name varchar(30) not null,
-    email varchar(180) not null,
-    timestamp timestamp not null,
-    cancel_hash char(64) not null
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    email VARCHAR(180) NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    cancel_hash CHAR(64) NOT NULL
 );
 
-create table Reservation_Timeslot
+CREATE TABLE Reservation_Timeslot
 (
-    reservation_timeslot_id int auto_increment not null primary key,
-    reservation_id int not null,
-    timeslot_id int not null,
-    constraint unq_reservation_timeslot unique (reservation_id, timeslot_id),
-    constraint FK_Timeslot foreign key (timeslot_id) references Timeslot (timeslot_id),
-    constraint FK_Reservation foreign key (reservation_id) references Reservation (reservation_id) on delete cascade
+    reservation_timeslot_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_id INT NOT NULL,
+    timeslot_id INT NOT NULL,
+    CONSTRAINT unq_reservation_timeslot UNIQUE (reservation_id, timeslot_id),
+    CONSTRAINT FK_Timeslot FOREIGN KEY (timeslot_id) REFERENCES Timeslot (timeslot_id),
+    CONSTRAINT FK_Reservation FOREIGN KEY (reservation_id) REFERENCES Reservation (reservation_id) ON DELETE CASCADE
 );
