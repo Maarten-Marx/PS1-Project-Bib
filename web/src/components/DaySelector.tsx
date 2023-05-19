@@ -24,9 +24,10 @@ type DayProps = {
 
 function Day(props: DayProps) {
     const date = moment(props.day.date, 'YYYY-MM-DD')
+    const startOfDay = moment().hour(0).minute(0).second(0).millisecond(0)
     date.locale('nl-be')
 
-    const disabled = props.day.openingTime == null || moment(props.day.date).date() < moment().date()
+    const disabled = props.day.openingTime == null || date.isBefore(startOfDay)
 
     return (
         <div className={`day${disabled? ' disabled' : ''}`}>
@@ -97,7 +98,7 @@ export default function DaySelector() {
             <div id='daySelector'>
                 <DayRangePicker days={state.daysOfWeek} setDate={setDate} />
                 <div id='daySelectorDays'>
-                    {state.daysOfWeek.map((day, i) => <Day day={day} key={i}/>)}
+                    {state.daysOfWeek.map((day, i) => <Day day={day} key={i} />)}
                 </div>
             </div>
         )
