@@ -3,6 +3,7 @@ import Axios from 'axios'
 import Loading from './Loading'
 import moment from 'moment'
 import TimeRangeSelector from './TimeRangeSelector'
+import { apiHost } from '../util'
 
 type Timeslot = {
     id: number,
@@ -63,7 +64,8 @@ function TimeSelector(props: TimeSelectorProps) {
 }
 
 async function getTimeslots(day: string): Promise<TimeslotsResponse> {
-    return await Axios.get<TimeslotsResponse>(`http://127.0.0.1:8080/timeslots/${day}`)
+    // noinspection HttpUrlsUsage
+    return await Axios.get<TimeslotsResponse>(`http://${apiHost}/timeslots/${day}`)
         .then(res => res.data)
         .catch(() => {
             return {

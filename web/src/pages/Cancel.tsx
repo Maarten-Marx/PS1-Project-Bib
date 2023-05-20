@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
 import Axios from 'axios'
 import '../css/Cancel.css'
+import { apiHost } from '../util'
 
 function Cancel() {
     const { hash } = useParams()
@@ -41,7 +42,8 @@ function Cancel() {
 async function makeRequest(hash: string | undefined): Promise<boolean> {
     if (hash === undefined) return false
 
-    return await Axios.delete(`http://127.0.0.1:8080/reservations/${hash}`)
+    // noinspection HttpUrlsUsage
+    return await Axios.delete(`http://${apiHost}/reservations/${hash}`)
         .then(res => res.status === 200)
         .catch(() => false)
 }

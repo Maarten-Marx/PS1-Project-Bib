@@ -5,7 +5,7 @@ import moment, { Moment } from 'moment'
 import 'moment/locale/nl-be'
 import Axios from 'axios'
 import Loading from './Loading'
-import { capitalize } from '../util'
+import { apiHost, capitalize } from '../util'
 
 type Day = {
     date: string,
@@ -126,7 +126,8 @@ export default function DaySelector(props: DaySelectorProps) {
 }
 
 async function getDaysInWeek(day: Moment): Promise<Day[]> {
-    return await Axios.get<WeekResponse>(`http://127.0.0.1:8080/week/${day.format('YYYY-MM-DD')}`)
+    // noinspection HttpUrlsUsage
+    return await Axios.get<WeekResponse>(`http://${apiHost}/week/${day.format('YYYY-MM-DD')}`)
         .then(response => {
             const daysOfWeek: Day[] = []
             for (const dayOfWeek of response.data.days) {
