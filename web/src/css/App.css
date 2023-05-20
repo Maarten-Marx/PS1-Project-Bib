@@ -297,16 +297,16 @@ h2 {
     font-weight: bolder;
 }
 
-#form {
+form {
     display: flex;
     flex-direction: column;
 }
 
-#form h1 {
+form h1 {
     margin-block-end: 5px;
 }
 
-#form p {
+form p {
     color: var(--tertiary-text-color);
     margin-block-end: 15px;
     text-align: justify;
@@ -330,7 +330,7 @@ h2 {
     border-radius: var(--border-radius);
 }
 
-#form button {
+input[type="submit"] {
     font-family: 'Lexend', sans-serif;
     font-size: 16px;
     background-color: var(--selected-background-color);

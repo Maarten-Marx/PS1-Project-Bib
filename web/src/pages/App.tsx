@@ -36,7 +36,8 @@ function App() {
         setState({ ...prevState, [name]: value })
     }
 
-    function placeReservation() {
+    function placeReservation(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         if (!state) return
 
         const payload: ReservationPayload = {
@@ -101,29 +102,28 @@ function App() {
                         <p className='subtitle'>Geel</p>
                     </div>
                 </div>
-                <div id='form'>
+                <form onSubmit={placeReservation}>
                     <h1>Een plaats reserveren</h1>
                     <SecondaryHorizontalDivider />
                     <p>Vul uw gegevens in om plaatsen te reserveren. U ontvangt een bevestiging per e-mail.</p>
 
                     <div className='formInput'>
                         <label htmlFor='firstName'>Voornaam</label>
-                        <input type='text' name='firstName' id='firstName' onChange={handleInputChange} />
+                        <input type='text' name='firstName' id='firstName' onChange={handleInputChange} required />
                     </div>
                     <div className='formInput'>
                         <label htmlFor='lastName'>Achternaam</label>
-                        <input type='text' name='lastName' id='lastName' onChange={handleInputChange} />
+                        <input type='text' name='lastName' id='lastName' onChange={handleInputChange} required />
                     </div>
                     <div className='formInput'>
                         <label htmlFor='email'>E-mailadres</label>
-                        <input type='email' name='email' id='email' onChange={handleInputChange} />
+                        <input type='email' name='email' id='email' onChange={handleInputChange} required />
                     </div>
-                    <button disabled={formDisabled}
-                            className={formDisabled ? 'disabled' : ''}
-                            onClick={placeReservation}>
-                        Bevestigen
-                    </button>
-                </div>
+                    <input type='submit'
+                           disabled={formDisabled}
+                           className={formDisabled ? 'disabled' : ''}
+                           value='Bevestigen' />
+                </form>
                 <p id='copy'>RUMAMUSE &copy; 2023</p>
             </div>
         </main>
