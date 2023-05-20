@@ -280,6 +280,7 @@ h2 {
 .someSelected:not(.selected) {
     border-color: var(--quaternary-border-color);
     outline: solid 2px var(--quaternary-border-color);
+    outline-offset: -3px;
 }
 
 .disabled, .disabled > * {
