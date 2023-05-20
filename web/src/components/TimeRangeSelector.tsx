@@ -15,9 +15,15 @@ function TimeSlot(props: TimeSlotProps) {
     const end = moment(props.timeslot.closingTime).format('HH:mm')
 
     const selected = props.selectedIDs.includes(props.timeslot.id)
+    const disabled = moment(props.timeslot.openingTime).isBefore(moment())
 
     return (
-        <div className={'timeSlot' + (selected ? ' selected' : '')} onClick={props.toggleTimeslot}>
+        <div className={'timeSlot'
+            + (selected ? ' selected' : '')
+            + (disabled ? ' disabled' : '')
+        } onClick={() => {
+            if (!disabled) props.toggleTimeslot()
+        }}>
             <p>{start} - {end}</p>
             <p>{props.timeslot.numberOfSeats} <FontAwesomeIcon className='icon' icon={solid('user')} /></p>
         </div>
@@ -47,6 +53,7 @@ export default function TimeRangeSelector(props: TimeRangeSelectorProps) {
 
     const someSelected = props.timeslots.some(slot => props.selectedIDs.includes(slot.id))
     const allSelected = !props.timeslots.some(slot => !props.selectedIDs.includes(slot.id))
+    const disabled = moment(last.closingTime).isBefore(moment())
 
     return (
         <div className={'timeRangeSelector' + (state && state.opened ? ' opened' : '')}>
@@ -54,13 +61,22 @@ export default function TimeRangeSelector(props: TimeRangeSelectorProps) {
                 'timeRangeDetails'
                 + (someSelected ? ' someSelected' : '')
                 + (allSelected ? ' selected' : '')
+                + (disabled ? ' disabled' : '')
             }>
-                <p onClick={() =>
-                    props.toggleTimeslots(...props.timeslots.map(slot => slot.id))
-                }>{start} - {end}</p>
-                <button onClick={() => setState({
-                    opened: !state || !state.opened
-                })}>
+                <p onClick={() => {
+                    if (!disabled) {
+                        props.toggleTimeslots(
+                            ...props.timeslots
+                                .filter(slot => moment(slot.openingTime).isAfter(moment()))
+                                .map(slot => slot.id)
+                        )
+                    }
+                }}>{start} - {end}</p>
+                <button onClick={() => {
+                    if (!disabled) setState({
+                        opened: !state || !state.opened
+                    })
+                }}>
                     <FontAwesomeIcon className='icon' icon={solid('angle-right')} />
                 </button>
             </div>

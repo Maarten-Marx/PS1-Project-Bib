@@ -253,7 +253,7 @@ h2 {
     outline: solid 2px var(--quaternary-border-color);
 }
 
-.disabled {
+.disabled, .disabled > * {
     background-color: var(--disabled-background-color) !important;
     color: var(--disabled-text-color) !important;
     cursor: default !important;
