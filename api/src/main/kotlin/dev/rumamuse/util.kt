@@ -51,4 +51,5 @@ fun sendMail(title: String, body: String, from: String, to: String, password: St
     email.send()
 }
 
-fun cancelUrl(hash: String) = "http://127.0.0.1:3000/cancel/${hash}"
+@Suppress("HttpUrlsUsage")
+fun cancelUrl(hash: String) = "http://${webHost}/cancel/${hash}"

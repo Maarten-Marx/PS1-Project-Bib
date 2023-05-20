@@ -4,6 +4,7 @@ import DaySelector from '../components/DaySelector'
 import { PrimaryHorizontalDivider, PrimaryVerticalDivider, SecondaryHorizontalDivider } from '../components/Divider'
 import Axios from 'axios'
 import TimeSelector from '../components/TimeSelector'
+import { apiHost } from '../util'
 
 type AppState = {
     timeslotIDs: number[]
@@ -47,7 +48,8 @@ function App() {
             email: state.email
         }
 
-        Axios.post<any, any, ReservationPayload>('http://127.0.0.1:8080/reservations/new', payload)
+        // noinspection HttpUrlsUsage
+        Axios.post<any, any, ReservationPayload>(`http://${apiHost}/reservations/new`, payload)
             .then(res => {
                 if (res.status == 200) location.href = '/confirm'
             })

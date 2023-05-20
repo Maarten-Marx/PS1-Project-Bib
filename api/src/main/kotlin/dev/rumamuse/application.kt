@@ -9,6 +9,8 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import org.jetbrains.exposed.sql.Database
 
+val webHost = System.getenv("web-host") ?: throw Exception("Missing environment variable: web-host")
+
 fun main() {
     val dbUser = System.getenv("db-user") ?: throw Exception("Missing environment variable: db-user")
     val dbPass = System.getenv("db-pass") ?: throw Exception("Missing environment variable: db-pass")
@@ -20,8 +22,7 @@ fun main() {
 
 fun Application.module() {
     install(CORS) {
-        allowHost("127.0.0.1:3000")
-        allowHost("localhost:3000")
+        allowHost(webHost)
 
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Delete)
