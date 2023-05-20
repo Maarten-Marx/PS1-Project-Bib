@@ -90,9 +90,13 @@ function App() {
                 <div id='timeSlotsPanel'>
                     {
                         (state && state.date) ?
-                            <TimeSelector day={state.date}
+                            <>
+                                <TimeSelector day={state.date}
                                           toggleTimeslots={toggleTimeslots}
-                                          selectedIDs={state.timeslotIDs} /> :
+                                          selectedIDs={state.timeslotIDs} />
+                                <div id="topShadow"></div>
+                                <div id="bottomShadow"></div>
+                            </> :
                             <></>
                     }
                 </div>
