@@ -89,7 +89,7 @@ function App() {
                 <PrimaryHorizontalDivider />
                 <div id='timeSlotsPanel'>
                     {
-                        (state !== undefined && state.date !== undefined) ?
+                        (state && state.date) ?
                             <TimeSelector day={state.date}
                                           toggleTimeslots={toggleTimeslots}
                                           selectedIDs={state.timeslotIDs} /> :
