@@ -235,8 +235,6 @@ h2 {
     padding: 17px;
 
     border-radius: var(--border-radius);
-
-    z-index: 20000;
 }
 
 .day, .timeSlot, .timeRangeDetails {
