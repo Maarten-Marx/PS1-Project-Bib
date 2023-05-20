@@ -138,6 +138,8 @@ h2 {
 
     border: 1px solid var(--primary-border-color);
     border-radius: var(--border-radius);
+
+    cursor: pointer;
 }
 
 .day:not(.selected, .disabled) div:first-of-type p {
@@ -174,6 +176,7 @@ h2 {
     border-radius: var(--border-radius);
 
     z-index: 2;
+    overflow: hidden;
 }
 
 .timeRangeDetails p {
@@ -193,23 +196,6 @@ h2 {
     color: inherit;
 
     cursor: pointer;
-}
-
-
-.timeRangeDetails button:hover {
-    background-color: var(--secondary-hover-background-color);
-}
-
-.timeRangeDetails.selected button:hover {
-    background-color: var(--primary-hover-background-color);
-}
-
-.timeRangeDetails button:active {
-    background-color: var(--secondary-pressed-background-color);
-}
-
-.timeRangeDetails.selected button:active {
-    background-color: var(--primary-pressed-background-color);
 }
 
 .timeRangeDetails .fa-angle-right {
@@ -253,6 +239,11 @@ h2 {
     z-index: 20000;
 }
 
+.day, .timeSlot, .timeRangeDetails {
+    user-select: none;
+    cursor: pointer;
+}
+
 .selected {
     background-color: var(--selected-background-color);
     color: var(--selected-text-color);
@@ -267,6 +258,23 @@ h2 {
 .disabled {
     background-color: var(--disabled-background-color) !important;
     color: var(--disabled-text-color) !important;
+    cursor: default !important;
+}
+
+:is(.timeRangeDetails :is(button, p), .day, .timeSlot):hover {
+    background-color: var(--secondary-hover-background-color);
+}
+
+:is(.timeRangeDetails.selected :is(button, p), .day.selected, .timeSlot.selected):hover {
+    background-color: var(--primary-hover-background-color);
+}
+
+:is(.timeRangeDetails :is(button, p), .day, .timeSlot):active {
+    background-color: var(--secondary-pressed-background-color);
+}
+
+:is(.timeRangeDetails.selected :is(button, p), .day.selected, .timeSlot.selected):active {
+    background-color: var(--primary-pressed-background-color);
 }
 
 #formHeader {
