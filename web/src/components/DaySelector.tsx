@@ -24,9 +24,10 @@ type DayProps = {
 
 function Day(props: DayProps) {
     const date = moment(props.day.date, 'YYYY-MM-DD')
+    const startOfDay = moment().hour(0).minute(0).second(0).millisecond(0)
     date.locale('nl-be')
 
-    const disabled = props.day.openingTime == null || moment(props.day.date).date() < moment().date()
+    const disabled = props.day.openingTime == null || date.isBefore(startOfDay)
 
     return (
         <div className={`day${disabled? ' disabled' : ''}`}>
@@ -52,15 +53,20 @@ type DayRangePickerProps = {
 
 function DayRangePicker(props: DayRangePickerProps) {
     moment.locale('nl-be')
-    const first = moment(props.days[0].date)
-    const last = moment(props.days.reverse()[0].date)
+    const first = props.days.at(0)
+    const last = props.days.at(-1)
+
+    if (first === undefined || last === undefined) return <></>
+
+    const firstDate = moment(first.date)
+    const lastDate = moment(last.date)
 
     return (
         <div id='dayRange'>
             <button onClick={() => props.setDate(-1)}>
                 <FontAwesomeIcon className='icon' icon={solid('angle-left')} />
             </button>
-            <p>{first.format('D MMMM')} - {last.format('D MMMM')}</p>
+            <p>{firstDate.format('D MMMM')} - {lastDate.format('D MMMM')}</p>
             <button onClick={() => props.setDate(1)}>
                 <FontAwesomeIcon className='icon' icon={solid('angle-right')} />
             </button>
@@ -89,7 +95,7 @@ export default function DaySelector() {
 
     if (state === undefined || state.daysOfWeek === undefined) {
         setDate(0)
-        return <main className='cancel'>
+        return <main>
             <Loading />
         </main>
     } else {
@@ -97,7 +103,7 @@ export default function DaySelector() {
             <div id='daySelector'>
                 <DayRangePicker days={state.daysOfWeek} setDate={setDate} />
                 <div id='daySelectorDays'>
-                    {state.daysOfWeek.map((day, i) => <Day day={day} key={i}/>)}
+                    {state.daysOfWeek.map((day, i) => <Day day={day} key={i} />)}
                 </div>
             </div>
         )

@@ -10,8 +10,10 @@
     --primary-background-color: #F5F5F5;
     --disabled-background-color: #D9D9D9;
     --selected-background-color: #D2052F;
-    --hover-background-color: #BC042A;
-    --pressed-background-color: #A60324;
+    --primary-hover-background-color: #BC042A;
+    --primary-pressed-background-color: #A60324;
+    --secondary-hover-background-color: #E7E7E7;
+    --secondary-pressed-background-color: #D9D9D9;
     --primary-text-color: #000000;
     --secondary-text-color: #D2052F;
     --tertiary-text-color: #8E8E8E;
@@ -19,7 +21,7 @@
     --disabled-text-color: #8E8E8E;
     --selected-text-color: #FFFFFF;
     --primary-border-color: #2F4858;
-    --selected-border-color: #2F4858;
+    --selected-border-color: #D2052F;
     --tertiary-border-color: #8E8E8E;
     --quaternary-border-color: #D2052F;
 
@@ -106,11 +108,11 @@ h2 {
 }
 
 #dayRange button:hover {
-    background-color: var(--primary-background-color);
+    background-color: var(--secondary-hover-background-color);
 }
 
 #dayRange button:active {
-    background-color: var(--disabled-background-color);
+    background-color: var(--secondary-pressed-background-color);
 }
 
 #daySelectorDays {
@@ -122,7 +124,7 @@ h2 {
 }
 
 .day {
-    flex-grow: 1;
+    flex: 100% 0 1;
 
     display: flex;
     flex-direction: column;
@@ -136,6 +138,8 @@ h2 {
 
     border: 1px solid var(--primary-border-color);
     border-radius: var(--border-radius);
+
+    cursor: pointer;
 }
 
 .day:not(.selected, .disabled) div:first-of-type p {
@@ -168,19 +172,59 @@ h2 {
 
     width: 175px;
     height: 60px;
-    padding: 10px;
 
     border-radius: var(--border-radius);
+
+    z-index: 2;
+    overflow: hidden;
+}
+
+.timeRangeDetails p {
+    padding: 18px 10px;
+
+    flex-grow: 1;
+}
+
+.timeRangeDetails button {
+    height: 100%;
+    padding: 10px;
+
+    border: none;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+
+    background-color: #0000;
+    color: inherit;
+
+    cursor: pointer;
+}
+
+.timeRangeDetails .fa-angle-right {
+    transition: transform .25s;
+}
+
+.opened .timeRangeDetails .fa-angle-right {
+    transform: rotate(180deg);
 }
 
 .timeRangeSlots {
     gap: 30px;
 
     height: 48px;
-    padding: 5px;
+    width: 0;
+    padding: 0;
+    margin-inline-start: -1px;
 
     border-left: none;
     border-radius: 0 5px 5px 0;
+
+    overflow: hidden;
+
+    transition: padding .25s;
+}
+
+.opened .timeRangeSlots {
+    width: auto;
+    padding-inline: 15px;
 }
 
 .timeSlot {
@@ -193,15 +237,42 @@ h2 {
     border-radius: var(--border-radius);
 }
 
+.day, .timeSlot, .timeRangeDetails {
+    user-select: none;
+    cursor: pointer;
+}
+
 .selected {
     background-color: var(--selected-background-color);
     color: var(--selected-text-color);
     border-color: var(--selected-border-color);
 }
 
-.disabled {
+.someSelected:not(.selected) {
+    border-color: var(--quaternary-border-color);
+    outline: solid 2px var(--quaternary-border-color);
+}
+
+.disabled, .disabled > * {
     background-color: var(--disabled-background-color) !important;
     color: var(--disabled-text-color) !important;
+    cursor: default !important;
+}
+
+:is(.timeRangeDetails :is(button, p), .day, .timeSlot):hover {
+    background-color: var(--secondary-hover-background-color);
+}
+
+:is(.timeRangeDetails.selected :is(button, p), .day.selected, .timeSlot.selected):hover {
+    background-color: var(--primary-hover-background-color);
+}
+
+:is(.timeRangeDetails :is(button, p), .day, .timeSlot):active {
+    background-color: var(--secondary-pressed-background-color);
+}
+
+:is(.timeRangeDetails.selected :is(button, p), .day.selected, .timeSlot.selected):active {
+    background-color: var(--primary-pressed-background-color);
 }
 
 #formHeader {
@@ -226,16 +297,16 @@ h2 {
     font-weight: bolder;
 }
 
-#form {
+form {
     display: flex;
     flex-direction: column;
 }
 
-#form h1 {
+form h1 {
     margin-block-end: 5px;
 }
 
-#form p {
+form p {
     color: var(--tertiary-text-color);
     margin-block-end: 15px;
     text-align: justify;
@@ -259,7 +330,7 @@ h2 {
     border-radius: var(--border-radius);
 }
 
-#form button {
+input[type="submit"] {
     font-family: 'Lexend', sans-serif;
     font-size: 16px;
     background-color: var(--selected-background-color);
@@ -273,15 +344,28 @@ h2 {
 }
 
 #form button:hover {
-    background-color: var(--hover-background-color);
+    background-color: var(--primary-hover-background-color);
 }
 
 #form button:active {
-    background-color: var(--pressed-background-color);
+    background-color: var(--primary-pressed-background-color);
+}
+
+input {
+    accent-color: var(--secondary-text-color);
 }
 
 #copy {
     color: var(--tertiary-text-color);
     text-align: center;
+}
+
+.loading {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    color: var(--secondary-text-color);
 }
 

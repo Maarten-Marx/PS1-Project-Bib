@@ -12,10 +12,6 @@ main.cancel {
     justify-content: space-between;
 }
 
-main.cancel .fa-spinner {
-    color: var(--secondary-text-color);
-}
-
 code {
     padding-inline: .25rem;
     border-radius: .25rem;
