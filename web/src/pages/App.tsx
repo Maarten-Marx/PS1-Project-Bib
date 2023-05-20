@@ -51,7 +51,13 @@ function App() {
             .then(res => {
                 if (res.status == 200) location.href = '/confirm'
             })
-            .catch(() => {})
+            .catch(() => {
+            })
+    }
+
+    function showTimeRangeSelectors(selectedDate: string) {
+        const prevState = state || { timeslotIDs: [], firstName: '', lastName: '', email: '', date: undefined }
+        setState({ ...prevState, timeslotIDs: [], date: selectedDate })
     }
 
     function toggleTimeslots(...ids: number[]) {
@@ -78,7 +84,7 @@ function App() {
             <div id='leftPanel'>
                 <div id='dayPanel'>
                     <h1>Kies een dag</h1>
-                    <DaySelector />
+                    <DaySelector onDaySelect={showTimeRangeSelectors} selectedDate={state && state.date} />
                 </div>
                 <PrimaryHorizontalDivider />
                 <div id='timeSlotsPanel'>

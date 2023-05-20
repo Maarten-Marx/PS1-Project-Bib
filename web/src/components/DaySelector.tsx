@@ -19,7 +19,9 @@ type WeekResponse = {
 }
 
 type DayProps = {
-    day: Day
+    day: Day,
+    selectedDate: string | undefined,
+    setSelectedDate: (date: string) => void
 }
 
 function Day(props: DayProps) {
@@ -28,9 +30,17 @@ function Day(props: DayProps) {
     date.locale('nl-be')
 
     const disabled = props.day.openingTime == null || date.isBefore(startOfDay)
+    const selected = props.selectedDate === props.day.date
 
     return (
-        <div className={`day${disabled? ' disabled' : ''}`}>
+        <div className={
+            'day'
+            + (disabled ? ' disabled' : '')
+            + (selected ? ' selected' : '')
+        } onClick={() => {
+            if (disabled) return
+            props.setSelectedDate(props.day.date)
+        }}>
             <div>
                 <h2 className='dayName'>{capitalize(date.format('dddd'))}</h2>
                 <p className='date'>{date.format('D MMMM')}</p>
@@ -80,7 +90,12 @@ type DaySelectorState = {
     selectedIndex: number | null
 }
 
-export default function DaySelector() {
+type DaySelectorProps = {
+    selectedDate: string | undefined,
+    onDaySelect: (date: string) => void
+}
+
+export default function DaySelector(props: DaySelectorProps) {
     const [state, setState] = useState<DaySelectorState>()
 
     function setDate(offset: number) {
@@ -103,7 +118,7 @@ export default function DaySelector() {
             <div id='daySelector'>
                 <DayRangePicker days={state.daysOfWeek} setDate={setDate} />
                 <div id='daySelectorDays'>
-                    {state.daysOfWeek.map((day, i) => <Day day={day} key={i} />)}
+                    {state.daysOfWeek.map((day, i) => <Day day={day} key={i} setSelectedDate={props.onDaySelect} selectedDate={props.selectedDate}/>)}
                 </div>
             </div>
         )
