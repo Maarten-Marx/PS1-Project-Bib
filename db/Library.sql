@@ -42,8 +42,8 @@ CREATE TABLE Reservation_Timeslot (
     reservation_id INT NOT NULL,
     timeslot_id INT NOT NULL,
     CONSTRAINT unq_reservation_timeslot UNIQUE (reservation_id, timeslot_id),
-    CONSTRAINT FK_Timeslot FOREIGN KEY (timeslot_id) REFERENCES Timeslot (timeslot_id),
-    CONSTRAINT FK_Reservation FOREIGN KEY (reservation_id) REFERENCES Reservation (reservation_id) ON DELETE CASCADE
+    CONSTRAINT fk_timeslot FOREIGN KEY (timeslot_id) REFERENCES Timeslot (timeslot_id),
+    CONSTRAINT fk_reservation FOREIGN KEY (reservation_id) REFERENCES Reservation (reservation_id) ON DELETE CASCADE
 );
 
 -- INSERT TEST DATA
