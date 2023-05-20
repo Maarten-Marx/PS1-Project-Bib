@@ -115,6 +115,11 @@ h2 {
     background-color: var(--secondary-pressed-background-color);
 }
 
+#dayRange p {
+    width: 260px;
+    text-align: center;
+}
+
 #daySelectorDays {
     display: flex;
     justify-content: space-between;
