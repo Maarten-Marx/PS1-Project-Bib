@@ -124,7 +124,7 @@ h2 {
 }
 
 .day {
-    flex-grow: 1;
+    flex: 100% 0 1;
 
     display: flex;
     flex-direction: column;
