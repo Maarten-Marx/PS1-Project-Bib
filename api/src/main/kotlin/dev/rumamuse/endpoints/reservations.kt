@@ -25,8 +25,8 @@ import kotlinx.datetime.toJavaInstant
 fun Routing.reservations() {
     val prefix = "/reservations"
 
-    val emailAddr = System.getenv("email-addr")
-    val emailPass = System.getenv("email-pass")
+    val emailAddr = System.getenv("email-addr") ?: throw Exception("Missing environment variable: email-addr")
+    val emailPass = System.getenv("email-pass") ?: throw Exception("Missing environment variable: email-pass")
 
     options("$prefix/new") {
         call.respond(HttpStatusCode.OK)
