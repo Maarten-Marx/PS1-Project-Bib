@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 function Loading() {
-    return <FontAwesomeIcon icon={solid('spinner')} spinPulse size='2xl' />
+    return <div className='loading'>
+        <FontAwesomeIcon icon={solid('spinner')} spinPulse size='2xl' />
+    </div>
 }
 
 export default Loading

@@ -95,7 +95,7 @@ export default function DaySelector() {
 
     if (state === undefined || state.daysOfWeek === undefined) {
         setDate(0)
-        return <main className='cancel'>
+        return <main>
             <Loading />
         </main>
     } else {

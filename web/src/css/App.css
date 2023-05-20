@@ -350,3 +350,12 @@ h2 {
     text-align: center;
 }
 
+.loading {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    color: var(--secondary-text-color);
+}
+
