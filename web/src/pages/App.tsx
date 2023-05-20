@@ -39,7 +39,14 @@ function App() {
     function placeReservation() {
         if (!state) return
 
-        Axios.post<any, any, ReservationPayload>('http://127.0.0.1:8080/reservations/new', { ...state })
+        const payload: ReservationPayload = {
+            timeslotIDs: state.timeslotIDs,
+            firstName: state.firstName,
+            lastName: state.lastName,
+            email: state.email
+        }
+
+        Axios.post<any, any, ReservationPayload>('http://127.0.0.1:8080/reservations/new', payload)
             .then(res => {
                 if (res.status == 200) location.href = '/confirm'
             })
