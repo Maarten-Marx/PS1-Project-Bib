@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Axios from 'axios'
 import Loading from './Loading'
 import moment from 'moment'
@@ -26,6 +26,14 @@ type TimeSelectorProps = {
 
 function TimeSelector(props: TimeSelectorProps) {
     const [timeslots, setTimeslots] = useState<Timeslot[]>()
+    const dayRef = useRef(props.day)
+
+    useEffect(() => {
+        if (dayRef.current !== props.day) {
+            dayRef.current = props.day
+            setTimeslots(undefined)
+        }
+    })
 
     if (timeslots === undefined) {
         getTimeslots(props.day)
