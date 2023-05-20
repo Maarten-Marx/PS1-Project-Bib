@@ -351,6 +351,10 @@ input[type="submit"] {
     background-color: var(--primary-pressed-background-color);
 }
 
+input {
+    accent-color: var(--secondary-text-color);
+}
+
 #copy {
     color: var(--tertiary-text-color);
     text-align: center;
